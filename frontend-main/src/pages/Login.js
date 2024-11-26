@@ -124,10 +124,10 @@ const Login = () => {
       </header>
       <div className="containerlogin">
         {/* <Link to="/" className="link h">Home</Link> */}
-        <h2 className="heading">Login</h2>
-        <form onSubmit={handleLogin} id="login-form">
+        <div><h2 className="heading">Login</h2></div>
+        <div><form onSubmit={handleLogin} id="login-form">
           <div className="details">
-            <label htmlFor="email">Email:</label><br />
+            {/* <label htmlFor="email">Email:</label><br /> */}
             <input
               onChange={handleChange}
               type="email"
@@ -138,7 +138,7 @@ const Login = () => {
             />
           </div>
           <div className="details">
-            <label htmlFor="password">Password:</label><br />
+            {/* <label htmlFor="password">Password:</label><br /> */}
             <input
               onChange={handleChange}
               type={showPassword ? 'text' : 'password'}
@@ -149,14 +149,15 @@ const Login = () => {
             <button type="button" id="togglePassword" className="toggle-password" style={{width:"fit-content"}} onClick={togglePassword}>
             {showPassword ? <i className="fas fa-eye-slash a"></i> : <i className="fas fa-eye a"></i>}
           </button>
+          <Link to="/forgotpassword" className="link">Forgot Password?</Link>
           </div>
           <button type="submit" className="bu">Login</button><br></br>
           <span className='s'>Don't have an account?
             <Link to="/signup" className="link"> Sign Up</Link><br />
-            <Link to="/forgotpassword" className="link">Forgot Password?</Link>
           </span>
         </form>
         <hr />
+        </div>
         <div className="g-signin-button" onClick={googleLogin}>
           <div className="content-wrapper">
             <img className="google-logo" src="./image.png" alt="google" />
@@ -164,15 +165,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <footer style={{ backgroundColor: "black", color: "white", position: "fixed", bottom: "0", width: "100%", height: "4vh", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "0.8rem"}}className='lfooter'>
-        <div className="footer">
-          <p>©2024 Elite Designs</p>
-          <p className="socialmedia">E-mail, Instagram, X</p>
-          <p>elitedesigns@gmail.com</p>
-        </div>
-      </footer>
     </div>
-    
   );
   
 }

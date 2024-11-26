@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../data/apipath';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import '../css/UP.css';
 const UP = () => {
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ const UP = () => {
 
   const Changepassword = async (e) => {
     e.preventDefault();
-    
+
     // Validate form data
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -111,7 +111,7 @@ const UP = () => {
       console.error('Error changing password:', err);
       alert('Failed to change password. Please try again.');
     }
-};
+  };
 
 
 
@@ -139,45 +139,43 @@ const UP = () => {
   //           onChange={(e) => setConfirmPassword(e.target.value)} 
   //         />
   //         {errors.confirmPassword && <p style={{ color: 'red' }}>{errors.confirmPassword}</p>}
-          
+
   //         <button type="submit" disabled={isLoading}>Update</button>
   //       </form>
   //     </div>
   //   </div>
   // );
-
-
   return (
     <div className="update-password">
       <div className="update-password-container" style={{ width: "100%", backgroundColor: "black" }}>
         <h1>CHANGE PASSWORD</h1>
         <form onSubmit={Changepassword}>
           <label htmlFor="new-password">Enter new password:</label>
-          <input 
-            type="text" 
-            id="new-password" 
+          <input
+            type="text"
+            id="new-password"
             placeholder='Enter new password'
-            value={newPassword} 
-            onChange={(e) => setNewPassword(e.target.value)} 
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
           />
           {errors.newPassword && <p className="error">{errors.newPassword}</p>}
           <br></br>
           <label htmlFor="confirm-password">Enter confirm password:</label>
-          <input 
-            type="text" 
-            id="confirm-password"             
+          <input
+            type="text"
+            id="confirm-password"
             placeholder='Enter confirm password'
-            value={confirmPassword} 
-            onChange={(e) => setConfirmPassword(e.target.value)} 
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
-          
-          <button type="submit" disabled={isLoading}>Update</button>
+
+          <button type="submit" disabled={isLoading}>UPDATE</button>
         </form>
       </div>
     </div>
   );
-  
+
 
 
 }

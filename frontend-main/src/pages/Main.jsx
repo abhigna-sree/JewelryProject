@@ -1,7 +1,7 @@
 // src/pages/Main.jsx
 import React, { useEffect, useState, useRef } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Corrected import
+import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; // Corrected import
 import { API_URL } from '../data/apipath';
 import '../css/Main.css';
 import { set } from 'mongoose';
@@ -31,7 +31,7 @@ const Main = () => {
     const [pencilSize, setPencilSize] = useState(1);
     const [eraserSize, setEraserSize] = useState(5);
     const [isDrawing, setIsDrawing] = useState(false);
-    const canvasBackgroundColor = "white"; 
+    const canvasBackgroundColor = "white";
     useEffect(() => {
         const fetchUserData = async () => {
             const token = localStorage.getItem('logintoken');
@@ -79,26 +79,26 @@ const Main = () => {
                 const size = Math.min(canvas.clientWidth, canvas.clientHeight);
                 canvas.width = size;
                 canvas.height = size; // Set both width and height to maintain square shape
-                
+
                 // Clear the canvas and set the background color to white
                 context.fillStyle = 'white';
                 context.fillRect(0, 0, canvas.width, canvas.height);
             }
         };
-        
+
         // Resize on window resize
         window.addEventListener('resize', resizeCanvas);
-        
+
         // Initial resize
         resizeCanvas();
-        
+
         // Cleanup on component unmount
         return () => {
             window.removeEventListener('resize', resizeCanvas);
         };
     }, [navigate]);
-    
-    
+
+
     const handleLogout = () => {
         localStorage.removeItem('logintoken');
         localStorage.removeItem('user');
@@ -137,58 +137,58 @@ const Main = () => {
         }
         setCanloading(true);
         const ctx = canvas.getContext('2d');
-    
+
         // Create a temporary canvas to store the existing drawing
         const tempCanvas = document.createElement('canvas');
         tempCanvas.width = canvas.width;
         tempCanvas.height = canvas.height;
         const tempCtx = tempCanvas.getContext('2d');
-        
+
         // Copy the current drawing onto the temporary canvas
         tempCtx.drawImage(canvas, 0, 0);
-    
+
         // Set white background on the original canvas
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
+
         // Draw the saved image back on top of the white background
         ctx.drawImage(tempCanvas, 0, 0);
-    
+
         // Convert the updated canvas (with white background and drawing) to a Data URL
         const dataURL = canvas.toDataURL('image/jpg');
-    
+
         // Convert Data URL to Blob
         const blob = await fetch(dataURL).then(res => res.blob());
-    
+
         // Create a File from Blob
         const file = new File([blob], 'canvasimg.jpg', { type: 'image/jpg' });
         setCanseletedFile(file);
-    
+
         // Create FormData object for image upload
         const formData = new FormData();
         formData.append('images', file); // Append the canvas image file
-    
+
         try {
             const response = await fetch(`${API_URL}/vendor/imgvendor/${user.employee._id}`, {
                 method: 'POST',
                 body: formData,
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error uploading images: ${response.statusText}`);
             }
-    
+
             const data = await response.json();
             console.log('Image upload response:', data);
-    
+
             // Once the image is successfully uploaded, trigger prediction
             await triggerPrediction(file);
-            
+
         } catch (error) {
             console.error('Error uploading images:', error);
         }
     };
-    
+
     const triggerPrediction = async (file) => {
         try {
             const response = await fetch(`${API_URL}/vendor/predict/${user.employee._id}`, {
@@ -198,11 +198,11 @@ const Main = () => {
                     'Content-Type': 'application/json',
                 }
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error predicting file: ${response.statusText}`);
             }
-    
+
             const data = await response.json();
             setCangeneratedImage(`${API_URL}/output/${data.result.node_response.fileName}`);
             setCanloading(false);
@@ -210,7 +210,7 @@ const Main = () => {
             console.error('Error during prediction:', error);
         }
     };
-    
+
     const handleDrop = (e) => {
         e.preventDefault();
         const files = Array.from(e.dataTransfer.files);
@@ -333,54 +333,57 @@ const Main = () => {
         const offsetY = touch.clientY - rect.top;
         startDrawing({ nativeEvent: { offsetX, offsetY } });
     };
-    
+
     const handleTouchMove = (e) => {
         e.preventDefault(); // Prevent default touch behavior
         draw(e); // Call the draw function here
     };
-    
+
     const handleTouchEnd = () => {
         stopDrawing(); // Ensure the drawing stops when touch ends
     };
-    
+
     return (
         <div className='content'>
             <header>
-            <nav id="nav" className="nav">
-            <div className="logo" id="logo">Elite Designs</div>
-          <button
-          className="hamburger"
-          onClick={() =>{ setNavOpen(!navOpen);}}
-          aria-expanded={navOpen}
-          aria-controls="navitems"
-        >
-          ☰
-        </button>
-          <div className={!navOpen ? 'navitems' : 'notnavitems'} id="navitems">
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/explore">Explore</Link></li>
-              <li><Link to="/contact">Contact Us</Link></li>
-              <button className='btn btn-warning mx-2 mb-2' onClick={() => navigate('/collections')}>My Collections</button>
-            </ul>
-          </div>
-                <div className="dropdown">
-                    <button className="drop-down" />
-                    <div className="dropdown-content">
-                    {/* <Link to="/"><span id="user-details">User</span></Link> */}
-                    <button className='btn btn-primary mx-2 mb-2' onClick={() => navigate('/profile')}>Profile</button>
-                    {/* <button to="/" id="logout-link">Logout</button> */}
-                    <button onClick={handleLogout} className='btn btn-danger mx-2 mb-2'>Logout</button>
+                <nav id="nav" className="nav">
+                    <div className="logo" id="logo">Elite Designs</div>
+                    <button
+                        className="hamburger"
+                        onClick={() => { setNavOpen(!navOpen); }}
+                        aria-expanded={navOpen}
+                        aria-controls="navitems"
+                    >
+                        ☰
+                    </button>
+                    <div className={!navOpen ? 'navitems' : 'notnavitems'} id="navitems">
+                        <ul>
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/explore">Explore</Link></li>
+                            <li><Link to="/contact">Contact Us</Link></li>
+                            <button className='btn btn-warning mx-2 mb-2' onClick={() => navigate('/collections')}>My Collections</button>
+                            <div className="dropdown">
+                        <button className="drop-down" />
+                        <div className="dropdown-content">
+                            {/* <Link to="/"><span id="user-details">User</span></Link> */}
+                            <button className='btnp mx-2 mb-2' onClick={() => navigate('/profile')}>Profile</button>
+                            {/* <button to="/" id="logout-link">Logout</button> */}
+                            <button onClick={handleLogout} className='btn btn-danger mx-2 mb-2'>Logout</button>
+                        </div>
                     </div>
-                </div>
+                        </ul>
+                    </div>
+
+                    
                 </nav>
             </header>
-        
-            <div className="main-container" style={{ marginTop: '25px',marginBottom: '25px'}}>
-            <h1 className="text-center text-white mb-4 mt-4">AI-Driven Jewelry Transforming Sketches into Stunning Creations</h1>
+
+            <div className="main-container" style={{ marginTop: '25px', marginBottom: '25px' }}>
+                <h1 id="line1" className='text-center'>Upload Jewelry Images</h1>
+                <h1 className="text-center text-white mb-4 mt-4 mhead" id='line2'>AI-Driven Jewelry Transforming Sketches into Stunning Creations</h1>
                 <p className="text-center text-white mb-4 mt-4 fw-bold f">Welcome, {user ? user.employee.username : 'User'}!</p>
                 {user ? (
-                    <div className="text-center">
+                    <div className="text-center drag">
                         {/* Drag and Drop Area */}
                         <label
                             htmlFor="fileInput"
@@ -389,7 +392,8 @@ const Main = () => {
                             className="border border-dashed p-4 mb-4"
                             style={{ backgroundColor: '#e9ecef', borderRadius: '10px', cursor: 'pointer' }}
                         >
-                            <p className="text-center">Drag and Drop or click to upload your high resolution pencil sketch image</p>
+
+                            <p className="text-center inputtext">Drag and Drop or click to upload your high resolution pencil sketch image</p>
                             <input
                                 type="file"
                                 id="fileInput"
@@ -398,7 +402,7 @@ const Main = () => {
                                 className="form-control-file d-none"
                             />
                         </label>
-    
+
                         {/* Image Previews */}
                         <div className="store d-flex justify-content-center flex-wrap">
                             {givenimg.map((image, index) => (
@@ -420,89 +424,17 @@ const Main = () => {
                             ) : (loading && <div className="spinner-border m-5" role="status"></div>)}
                         </div>
                         {/* Upload Sketch Button */}
-                        <button onClick={onUpload} style={{ }} className={`btn btn-success mt-4 mb-4 ${!gen? 'd-none' : ''}`}>Upload Sketch</button>
-    
-                        {/* Drawing Canvas */}
-                        {/* <h3 className="mt-5">Draw Your Design</h3>
-                        <div className="canvas-container mt-3 d-flex flex-column align-items-center">
-                            <canvas
-                                ref={canvasRef}
-                                width={500}
-                                height={500}
-                                onMouseDown={startDrawing}
-                                onMouseMove={draw}
-                                onMouseUp={stopDrawing}
-                                onMouseLeave={stopDrawing}
-                                onTouchStart={handleTouchStart}
-                                onTouchMove={handleTouchMove}
-                                onTouchEnd={handleTouchEnd}
-                                className="border"
-                                style={{ width: '100%', maxWidth: '500px', height: 'auto' }} // Responsive square size
-                            />
-                            <div className="d-flex flex-wrap justify-content-center mt-2">
-                                <button onClick={clearCanvas} className="btn btn-outline-danger me-2 mb-2">Clear Canvas</button>
-                                <button onClick={() => setIsEraser(!isEraser)} className="btn btn-outline-secondary mb-2">
-                                    {isEraser ? 'Switch to Pencil' : 'Switch to Eraser'}
-                                </button>
-                            </div>
-                            <div className="d-flex flex-wrap justify-content-center mb-2">
-                                <label htmlFor="pencilSize" className="form-label me-2">Pencil Size</label>
-                                <select
-                                    id="pencilSize"
-                                    value={pencilSize}
-                                    onChange={(e) => setPencilSize(Number(e.target.value))}
-                                    className="form-select"
-                                    style={{ width: '100px' }}
-                                >
-                                    <option value={1}>1</option>
-                                    <option value={5}>5</option>
-                                    <option value={10}>10</option>
-                                </select>
-                            </div>
-                            <div className="d-flex flex-wrap justify-content-center mb-2">
-                                <label htmlFor="eraserSize" className="form-label me-2">Eraser Size</label>
-                                <select
-                                    id="eraserSize"
-                                    value={eraserSize}
-                                    onChange={(e) => setEraserSize(Number(e.target.value))}
-                                    className="form-select"
-                                    style={{ width: '100px' }}
-                                >
-                                    <option value={5}>5</option>
-                                    <option value={10}>10</option>
-                                    <option value={20}>20</option>
-                                </select>
-                            </div>
-                            <button onClick={processCanvasImage} className="btn btn-primary mt-4">
-                                Process
-                            </button>
-                        </div>
-    
-                        {(cangeneratedImage) ? (
-                            <div className="position-relative m-2">
-                                <img src={cangeneratedImage} alt="Generated jewelry" className="img-thumbnail" height={256} width={256} />
-                                <a href={cangeneratedImage} download={cangeneratedImage.split('-')[1]} className="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-1">
-                                    &#8681;
-                                </a>
-                            </div>
-                        ) : (canloading && <div className="spinner-border m-5" role="status"></div>)}
-                     */}
+                        <button onClick={onUpload} style={{}} className={`btn btn-success mt-4 mb-4 ${!gen ? 'd-none' : ''}`}>Upload Sketch</button>
+
+
                     </div>
                 ) : (
                     <p>Loading user details...</p>
                 )}
             </div>
-            
-            <footer style={{ backgroundColor: "black", color: "white", position: "fixed", bottom: "0", width: "100%", height: "4vh", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "0.8rem"}}className='lfooter'>
-        <div className="footer">
-          <p>©2024 Elite Designs</p>
-          <p className="socialmedia">E-mail, Instagram, X</p>
-          <p>elitedesigns@gmail.com</p>
-        </div>
-      </footer>
         </div>
     );
-    
+
 };
 
 export default Main;

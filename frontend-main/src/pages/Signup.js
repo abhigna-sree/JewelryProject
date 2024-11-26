@@ -109,7 +109,6 @@ const Signup = () => {
         <h2 className='heading'>Signup</h2>
         <form onSubmit={handleSignup} id="loginform">
           <div className='details'>
-              <label htmlFor='username'>Username:</label><br></br>
               <input
                   onChange={handleChange}
                   type='text'
@@ -120,7 +119,6 @@ const Signup = () => {
               />
           </div>
           <div className='details'>
-              <label htmlFor='email'>Email:</label><br></br>
               <input
                   onChange={handleChange}
                   type='email'
@@ -131,7 +129,6 @@ const Signup = () => {
               />
           </div>
           <div className='details'>
-              <label htmlFor='password'>Password:</label><br></br>
               <input
                   onChange={handleChange}
                   type={showPassword1 ? 'text' : 'password'}
@@ -146,13 +143,12 @@ const Signup = () => {
           </div>
 
           <div className='details'>
-              <label htmlFor='confirmPassword'>Confirm Password:</label><br></br>
               <input
                   onChange={handleChange}
                   type={showPassword2 ? 'text' : 'password'}
                   name='confirmPassword'
                   autoFocus
-                  placeholder='Re-Enter password'
+                  placeholder='Confirm password'
                   value={signupinfo.confirmPassword}
               />
               <button type="button" className="toggle-password2" style={{width:"fit-content"}} onClick={togglePassword2}>
@@ -160,19 +156,12 @@ const Signup = () => {
               </button>
           </div>
           <button type='submit'className='bu'>Signup</button>
-          <span className='s'>Already have an account?
+          <span className='sl'>Already have an account?
               <Link to="/login" className='link'>Login</Link>
           </span>
         </form>
         {/* <ToastContainer/> */}
       </div>
-      <footer style={{ backgroundColor: "black", color: "white", position: "fixed", bottom: "0", width: "100%", height: "4vh", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "0.8rem"}}className='lfooter'>
-        <div className="footer">
-          <p>©2024 Elite Designs</p>
-          <p className="socialmedia">E-mail, Instagram, X</p>
-          <p>elitedesigns@gmail.com</p>
-        </div>
-      </footer>
     </div>
   )
 }

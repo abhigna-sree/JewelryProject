@@ -1,15 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 body {
   /* overflow: hidden; Prevent scrolling */
   /* position: relative; */
   overflow: auto;
   background-color: #f0f2f5; /* Light background for contrast */
-  font-family: 'Arial', sans-serif; /* Modern font */
+  font-family: 'Playfair Display', serif; /* Modern font */
   font-size: 14px; /* Base font size */
 }
 html, body {
   overflow: auto; /* Allows scrolling */
 }
-
 *{
   overflow:visible;
 }
@@ -22,19 +22,18 @@ html, body {
 .up{
   margin-bottom: 200px;
 }
-.content{
-  overflow: visible;
-  min-height: 100%; 
-  position: static;
-  background: url('../img/Sakina_Z_IMG12157_FIV.jpg');
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-attachment: fixed; 
-  background-position: center;
+.content {
+  position: relative;
+  display: flex;
+  top: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 100vh;
 }
+
 .content::before {
-  /* padding: 20px; */
-  overflow: auto;
   content: '';
   background: url('../img/Sakina_Z_IMG12157_FIV.jpg');
   background-repeat: no-repeat;
@@ -45,24 +44,45 @@ html, body {
   left: 0;
   height: 100%;
   width: 100%;
-  /* filter: brightness(0.5); */
+  filter: brightness(0.5);
   z-index: -1;
 }
-h1, h2 {
-  color: #007bff; /* Primary color for headings */
+.btnp{
+  background-color: rgb(13, 95, 122);
+  color: white;
+  border-radius: 10px;
+}
+#line1 {
+  font-size: 3rem;
+  font-weight: 620;
+  font-family: 'Playfair Display', serif;
+}
+#line2 {
+  font-weight: 500;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
 }
 .nav{
-  position: relative;
+  position: fixed;
 }
 h1.text-center {
   margin-bottom: 20px; 
 }
-
+/* .drag{
+  position: relative;
+  top: 70px;
+}
+.mhead{
+  position: absolute;
+  top: 30px;
+} */
 
 .navitems {
     /* display: 'block'; */
     position: relative;
     right: 40px;
+    margin: 0;
+
 }
 .notnavitems {
     display: flex;
@@ -161,7 +181,8 @@ canvas {
 }
 
 .btn-danger {
-  background-color: #dc3545; /* Bootstrap danger color */
+  background-color: #ffffff;
+  color: black;
 }
 
 .btn-success {
@@ -182,6 +203,16 @@ canvas {
 
 .main-container{
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.inputtext{
+  color: black;
+  width: 40vw;
+  height: auto;
+  font-weight: 430;
 }
 .footer {
   display: flex;

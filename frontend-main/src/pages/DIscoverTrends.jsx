@@ -62,6 +62,7 @@ const DiscoverTrends = () => {
         </nav>
       </header>
 
+
       <div className="explore-carousel">
         <div className="explore-list">
           <div className="explore-item">
@@ -167,13 +168,6 @@ const DiscoverTrends = () => {
           </div>
         </div>
       </div>
-      <footer style={{ backgroundColor: "black", color: "white", position: "fixed", bottom: "0", width: "100%", height: "4vh", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "0.8rem"}}className='lfooter'>
-        <div className="footer">
-          <p>©2024 Elite Designs</p>
-          <p className="socialmedia">E-mail, Instagram, X</p>
-          <p>elitedesigns@gmail.com</p>
-        </div>
-      </footer>
     </div>
   );
 };

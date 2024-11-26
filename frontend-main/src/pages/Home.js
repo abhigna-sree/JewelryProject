@@ -87,7 +87,8 @@ function Home() {
 
       </header>
       <div className="intro-slide">
-        <p className="introname">The Jewelry Design Pattern Generation</p>
+        <p className="headingname">ELITE</p>
+        <p className="introname">The Jewelry Designer</p>
         <video id="Video" autoPlay muted loop>
           <source src="img/vido.mp4" type="video/mp4" />
         </video>
@@ -115,13 +116,24 @@ function Home() {
       </div>
 
       <div className="container2">
-        <div className="left2 c2item1 c2items c2img" id="left2" style={{ backgroundImage: `url(${leftImages[currentIndex]})` }} />
+        <div className="left2 c2item1 c2items c2img" id="left2" style={{ backgroundImage: `url(${leftImages[currentIndex]})` }} >
+            {/* <button class="c2btn1 button " id="c2btn1"></button>
+            <button class="c2btn2 button" id="c2btn2"></button>
+            <button class="c2btn3 button" id="c2btn3"></button> */}
+        </div>
         <div className="middle2 c2item2 c2items" id="middle">
-          <p>Elite presents Jewelry Collections</p>
-          <p>Dive into a curated collection where technology meets artistry</p>
+          <p id="c2l1">Elite</p>
+          <p id="c2l2">presents</p>
+          <p id="c2l3">Jewelry Collections</p>
+          <p id="c2l4">Explore the Pinnacle of AI-Created Jewelry</p>
+          <p id="c2l5">Dive into a curated collection where technology meets artistry, showcasing stunning designs crafted from your visions.</p>
           <button className="explorebtn" onClick={() => window.location.href='/login'}>Explore Now</button>
         </div>
-        <div className="right2 c2items c2item3 c2img" id="right2" style={{ backgroundImage: `url(${rightImages[currentIndex]})` }} />
+        <div className="right2 c2items c2item3 c2img" id="right2" style={{ backgroundImage: `url(${rightImages[currentIndex]})` }} >
+            {/* <button class="c2btn4 button" id="c2btn4"></button>
+            <button class="c2btn5 button" id="c2btn5"></button>
+            <button class="c2btn6 button" id="c2btn6"></button> */}
+        </div>
       </div>
 
       <div className="contact c3 container3" id="contact" style={{ backgroundColor: "black" ,color:"white"}}>
@@ -132,9 +144,9 @@ function Home() {
       
       <footer style={{ backgroundColor: "black" }}>
         <div className="footer">
-          <p>©2024 Elite Designs</p>
+          <p className='copyright'>©2024 Elite Designs</p>
           <p className="socialmedia">E-mail, Instagram, X</p>
-          <p>elitedesigns@gmail.com</p>
+          <p className='mail'>elitedesigns@gmail.com</p>
         </div>
       </footer>
     </>
