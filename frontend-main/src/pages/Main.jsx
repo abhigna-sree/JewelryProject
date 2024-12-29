@@ -249,7 +249,7 @@ const Main = () => {
             // const formData = new FormData();
             // formData.append('image', selectedFile);
 
-            const response = await fetch(`${API_URL}/vendor/predict/${user.employee._id}`, {
+            const response = await fetch('${http://127.0.0.1:8000/}/vendor/predict/${user.employee._id}`}', {
                 method: 'POST',
                 // body: formData,
             });
@@ -363,14 +363,14 @@ const Main = () => {
                             <li><Link to="/contact">Contact Us</Link></li>
                             <button className='btn btn-warning mx-2 mb-2' onClick={() => navigate('/collections')}>My Collections</button>
                             <div className="dropdown">
-                        <button className="drop-down" />
-                        <div className="dropdown-content">
-                            {/* <Link to="/"><span id="user-details">User</span></Link> */}
-                            <button className='btnp mx-2 mb-2' onClick={() => navigate('/profile')}>Profile</button>
-                            {/* <button to="/" id="logout-link">Logout</button> */}
-                            <button onClick={handleLogout} className='btn btn-danger mx-2 mb-2'>Logout</button>
-                        </div>
-                    </div>
+                                <button className="drop-down" />
+                                <div className="dropdown-content">
+                                    {/* <Link to="/"><span id="user-details">User</span></Link> */}
+                                    <button className='btnp mx-2 mb-2' onClick={() => navigate('/profile')}>Profile</button>
+                                    {/* <button to="/" id="logout-link">Logout</button> */}
+                                    <button onClick={handleLogout} className='btn btn-danger mx-2 mb-2'>Logout</button>
+                                </div>
+                            </div>
                         </ul>
                     </div>
 
